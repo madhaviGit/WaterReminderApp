@@ -24,6 +24,14 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v3
+        with:
+         path: /opt/hostedtoolcache/flutter
+         key: flutter-dependencies-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+         restore-keys: |
+                   flutter-dependencies-${{ runner.os }}-
+
       - name: Run tests
         run: flutter test
 
